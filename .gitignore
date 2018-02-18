@@ -1,4 +1,4 @@
-# Python - файлы
+# Python
 
 **/__pycache__
 **/*.pyc
@@ -6,3 +6,7 @@
 # Редактор
 
 .ropeproject
+
+# Java
+
+**/*.class
