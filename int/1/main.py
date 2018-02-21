@@ -2,13 +2,14 @@ from mysort import ProducSort
 
 
 
-sequence = "abacd"
+sequence = "caabca"
 rules = {
-    "aba": "cd",
-    "aa": "bb",
-    "cb": "bac",
-    "a": "c",
-    "b": "ac"
+    "ba": "ab",
+    "ca": "ac",
+    "da": "ad",
+    "cb": "bc",
+    "db": "bd",
+    "dc": "cd",
 }
 a = ProducSort(sequence, rules)
 a.sort()

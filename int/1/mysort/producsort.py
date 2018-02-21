@@ -75,9 +75,10 @@ class ProducSort:
             FG_NUM = 214
             FG_SEQ = 125 if is_end else 69
             FG_LINE = 240
-            padding_size = 4 * depth
+            padding = 6
+            padding_depth = padding * depth
             print("{0}{1} {2}".format(
-                    stylize(" " * (padding_size) + "|" + "_" * (padding_size), fg(FG_LINE), ),
+                    stylize(" " * (padding_depth) + "|" + "_" * (padding), fg(FG_LINE), ) if depth != 0 else "",
                     stylize(str(node["data"]["produc_number"]), fg(FG_NUM)),
                     stylize(node["data"]["sequence"], fg(FG_SEQ))
                     ), end="\n"
