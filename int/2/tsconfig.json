@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "amd",
+        "outFile": "app.js",
+        "pretty": true,
+    },
+    "files":[
+        "app.ts",
+    ]
+}

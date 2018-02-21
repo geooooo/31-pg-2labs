@@ -10,3 +10,7 @@
 # Java
 
 **/*.class
+
+# JavaScript
+
+int/2/*.js
