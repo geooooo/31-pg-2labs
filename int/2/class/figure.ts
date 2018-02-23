@@ -1,4 +1,5 @@
 import {Point} from "./point";
+import {Line} from "./line";
 
 
 
@@ -26,6 +27,18 @@ export class Figure {
         return this._points;
     }
 
+    public lines(): Line[] {
+        let result: Line[] = [];
+        let inc = 2;
+        if (this._points.length > 2) {
+            inc = 1;
+        }
+        for (let i = 0; i < this._points.length-1; i += inc) {
+            result.push(new Line(this._points[i], this._points[i+1]));
+        }
+        return result;
+    }
+
     public get lineWidth(): number {
         return this._lineWidth;
     }
@@ -37,4 +50,5 @@ export class Figure {
     public set lineColor(value: string) {
         this._lineColor = value;
     }
+
 }

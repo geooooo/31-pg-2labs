@@ -1,5 +1,7 @@
 import {Point} from "./point";
+import {Line} from "./line";
 import {Figure} from "./figure";
+import {ExpertSystem} from "./expertsystem";
 
 
 
@@ -28,6 +30,8 @@ export class Canvas {
     private _figures: Figure[] = [];
     // Список выбранных фигур
     private _selectedFigures: Figure[] = [];
+    // Экспертная подсистема
+    private _expertSystem = new ExpertSystem(30);
 
     /*
         Привязка синглтона к полотну и получение контекса для рисования
@@ -48,7 +52,6 @@ export class Canvas {
         Проверка принадлежности точки к отрезку
     */
     private _lineHasPoint(lineBegin: Point, lineEnd: Point, point: Point): boolean {
-        // NOTE: алгоритм взят с википедии
         let x = point.x;
         let y = point.y;
         // Массив X-координат полигона
@@ -83,16 +86,29 @@ export class Canvas {
         Поиск фигуры, которой принадлежит точка
     */
     private _getFigureHasPoint(point: Point): Figure {
-        let result: Figure = null
+        let result: Figure = null;
+        console.log(this._figures);
+    outer:
         for (let figure of this._figures) {
-            for (let i = 0; i < figure.points.length; i += 2) {
-                let lineBegin = new Point(figure.points[i].x, figure.points[i].y);
-                let lineEnd = new Point(figure.points[i+1].x, figure.points[i+1].y);
+            console.log(figure.points);
+            if (figure.points.length > 2) {
+                for (let i = 0; i < figure.points.length-1; i++) {
+                    let lineBegin = new Point(figure.points[i].x, figure.points[i].y);
+                    let lineEnd = new Point(figure.points[i+1].x, figure.points[i+1].y);
+                    if (this._lineHasPoint(lineBegin, lineEnd, point)) {
+                        result = figure;
+                        break outer;
+                    }
+                }
+            } else {
+                let lineBegin = new Point(figure.points[0].x, figure.points[0].y);
+                let lineEnd = new Point(figure.points[1].x, figure.points[1].y);
                 if (this._lineHasPoint(lineBegin, lineEnd, point)) {
                     result = figure;
-                    break;
+                    break outer;
                 }
             }
+
         }
         return result;
     }
@@ -105,6 +121,7 @@ export class Canvas {
         this._context2D.strokeStyle = figure.lineColor;
         this._context2D.lineWidth = figure.lineWidth;
         this._context2D.lineCap = "round";
+        this._context2D.lineJoin = "round";
         this._context2D.moveTo(figure.points[0].x, figure.points[0].y);
         for (let point of figure.points.slice(1, figure.points.length)) {
             this._context2D.lineTo(point.x, point.y);
@@ -209,20 +226,96 @@ export class Canvas {
                         return;
                     }
                     this._toggleSelect(figure);
+                    // Проверка на инцидентность
+                    if (this._selectedFigures.length == 2) {
+                        let figureLines1 = this._selectedFigures[0].lines();
+                        let line1: Line;
+                        if (figureLines1.length > 1) {
+                            line1 = new Line(figureLines1[0].pointBegin,
+                                             figureLines1[figureLines1.length-1].pointEnd);
+                        } else {
+                            line1 = figureLines1[0];
+                        }
+                        let figureLines2 = this._selectedFigures[1].lines();
+                        let line2: Line;
+                        if (figureLines2.length > 1) {
+                            line2 = new Line(figureLines2[0].pointBegin,
+                                             figureLines2[figureLines2.length-1].pointEnd);
+                        } else {
+                            line2 = figureLines2[0];
+                        }
+                        console.log(figureLines1, figureLines2);
+                        let result = this._expertSystem.checkIncident(line1, line2);
+                        let figure1 = this._selectedFigures[0]
+                        let figure2 = this._selectedFigures[1]
+                        let newFigurePoints: Point[] = [];
+                        switch (result) {
+                            case "bb":
+                                for (let i = figure1.points.length-1; i >= 0; i--) {
+                                    newFigurePoints.push(figure1.points[i]);
+                                }
+                                for (let i = 1; i < figure2.points.length; i++) {
+                                    newFigurePoints.push(figure2.points[i]);
+                                }
+                                break;
+                            case "eb":
+                                for (let i = 0; i < figure1.points.length; i++) {
+                                    newFigurePoints.push(figure1.points[i]);
+                                }
+                                for (let i = 1; i < figure2.points.length; i++) {
+                                    newFigurePoints.push(figure2.points[i]);
+                                }
+                                break;
+                            case "be":
+                                for (let i = figure1.points.length-1; i >= 0; i--) {
+                                    newFigurePoints.push(figure1.points[i]);
+                                }
+                                for (let i = figure2.points.length-2; i >= 0; i--) {
+                                    newFigurePoints.push(figure2.points[i]);
+                                }
+                                break;
+                            case "ee":
+                                for (let i = 0; i < figure1.points.length; i++) {
+                                    newFigurePoints.push(figure1.points[i]);
+                                }
+                                for (let i = figure2.points.length-2; i >= 0; i--) {
+                                    newFigurePoints.push(figure2.points[i]);
+                                }
+                                break;
+                            default:
+                                return;
+                        }
+                        this._figures.push(new Figure(
+                            newFigurePoints,
+                            this._LINE_DEFAULT_COLOR,
+                            figure1.lineWidth
+                        ));
+                        this._deleteSelected();
+                        this._drawAll();
+                    }
                 } else {
                     // Начать растяжение линии
+                    this._clearSelection();
                     firstPoint = point;
                 }
             } else {
                 // Отрисовка линии и добавление в список
                 let secondPoint = new Point(e.layerX, e.layerY);
+                let secondX = e.layerX;
+                let secondY = e.layerY;
+                if (this._expertSystem.checkVertical(new Line(firstPoint, secondPoint))) {
+                    secondX = firstPoint.x;
+                } else if (this._expertSystem.checkHorizontal(new Line(firstPoint, secondPoint))) {
+                    secondY = firstPoint.y;
+                }
+                secondPoint = new Point(secondX, secondY);
                 let figure = new Figure(
                     [firstPoint, secondPoint],
                     this._LINE_DEFAULT_COLOR,
                     this._LINE_WIDTH
                 )
                 this._figures.push(figure);
-                this._draw(figure);
+                this._drawAll();
                 firstPoint = null;
             }
         });
