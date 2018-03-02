@@ -1,0 +1,108 @@
+link(rel="stylesheet", href="../style/student/list.css")
+
+
+
+form.form#formList(action="", method="get")
+    
+    .form__line
+        .form__element
+            label(for="isAllHighScoreList") Все экзамены сданы на отлично:
+        .form__element
+            input#isAllHighScoreList(type="checkbox")
+    
+    .form__line
+        .form__element
+            label(for="isDocHighScoreList") Имеется аттестат с отличием:
+        .form__element
+            input#isDocHighScoreList(type="checkbox")    
+    
+    .form__line
+        .form__element
+            label(for="isExternalList") Проживает вне города, в котором расположен университет:
+        .form__element
+            input#isExternalList(type="checkbox")
+    
+    .form__line
+        .form__element
+            label(for="isHostelList") Нуждается в общежитии:
+        .form__element
+            input#isHostelList(type="checkbox")
+    
+    .form__line
+        .form__element
+            input(type="submit", value="Найти")
+
+
+
+    .list
+        .list__item.list.student
+            .list__item №:
+                .student__number 0
+            .list__item Фамилия:
+                .student__lastname null
+            .list__item Город:
+                .student__city null
+            .list__item Результаты экзамена:
+                .list
+                    .list__item Математика:
+                        .student__scoreMath 0
+                    .list__item Физика:
+                        .student__scorePhys 0
+                    .list__item Информатика:
+                        .student__scoreInfo 0
+            .list__item Аттестат с отличием:
+                .student__isDocHighScore Нет
+            .list__item Все экзамены на "отлично":
+                .student__isAllHighScore Нет
+            .list__item Иногородний:
+                .student__isExternal Нет
+            .list__item Нуждается в общежитии:
+                .student__isHostel Нет
+        
+        .list__item.list.student
+            .list__item №:
+                .student__number 1
+            .list__item Фамилия:
+                .student__lastname null
+            .list__item Город:
+                .student__city null
+            .list__item Результаты экзамена:
+                .list 
+                    .list__item Математика:
+                        .student__scoreMath 0
+                    .list__item Физика:
+                        .student__scorePhys 0
+                    .list__item Информатика:
+                        .student__scoreInfo 0
+            .list__item Аттестат с отличием:
+                .student__isDocHighScore Нет
+            .list__item Все экзамены на "отлично":
+                .student__isAllHighScore Нет
+            .list__item Иногородний:
+                .student__isExternal Нет
+            .list__item Нуждается в общежитии:
+                .student__isHostel Нет
+                    
+        .list__item.list.student
+            .list__item №:
+                .student__number 2
+            .list__item Фамилия:
+                .student__lastname null
+            .list__item Город:
+                .student__city null
+            .list__item Результаты экзамена:
+                .list
+                    .list__item Математика:
+                        .student__scoreMath 0
+                    .list__item Физика:
+                        .student__scorePhys 0
+                    .list__item Информатика:
+                        .student__scoreInfo 0
+            .list__item Аттестат с отличием:
+                .student__isDocHighScore Нет
+            .list__item Все экзамены на "отлично":
+                .student__isAllHighScore Нет
+            .list__item Иногородний:
+                .student__isExternal Нет
+            .list__item Нуждается в общежитии:
+                .student__isHostel Нет

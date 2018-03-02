@@ -1,0 +1,36 @@
+@import "../base/default";
+
+
+
+.list__item {
+    display: list-item;
+    list-style-type: none;
+
+    .list {
+        padding-left: $general_padding * 10;
+    }
+}
+
+
+
+.student__number,
+.student__lastname,
+.student__city,
+.student__isExternal,
+.student__isAllHighScore,
+.student__isHostel,
+.student__isDocHighScore,
+.student__scoreMath,
+.student__scoreInfo,
+.student__scorePhys {
+    display: inline;
+    font-weight: bold;
+}
+
+
+
+.list__item.student {
+    margin-top: $general_padding * 5;
+    padding-top: $general_padding;
+    border-top: $general-border-width solid $dark-blue;
+}

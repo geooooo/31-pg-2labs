@@ -1,0 +1,67 @@
+form.form#formAdd(action="", method="post")
+    
+    .form__line
+        .form__element
+            label(for="lastNameAdd") Фамилия:
+        .form__element
+            input#lastNameAdd(type="text")
+        
+    .form__line
+        .form__element
+            label(for="cityAdd") Город проживания:
+        .form__element
+            input#cityAdd(type="text")
+
+    .form__line
+        .form__element
+            label(for="isDocHighScoreAdd") Наличие аттестата с отличием:
+        .form__element
+            input#isDocHighScoreAdd(type="checkbox")
+
+    .form__line
+        .form__element
+            label(for="isHostelAdd") Необходимо общежитие:
+        .form__element
+            input#isHostelAdd(type="checkbox")
+
+    .form__line
+        .form__element
+            field.form
+                .form__line
+                    legend Оценки по вступительным экзаменам:
+                .form__line
+                    .form
+                        .form__line
+                            .form__element
+                                label(for="scoreMathAdd") Математика:       
+                            .form__element                      
+                                select#scoreMathAdd
+                                    option 2
+                                    option 3
+                                    option 4
+                                    option 5
+                        .form__line
+                            .form__element
+                                label(for="scorePhysAdd") Физика:
+                            .form__element
+                                select#scorePhysAdd
+                                    option 2
+                                    option 3
+                                    option 4
+                                    option 5
+                        .form__line
+                            .form__element
+                                label(for="scoreInfoAdd") Информатика:
+                            .form__element
+                                select#scoreInfoAdd
+                                    option 2
+                                    option 3
+                                    option 4
+                                    option 5
+
+    .form__line
+        .form__element
+            input.form__line(type="submit", value="Добавить")
+    
+    
+    

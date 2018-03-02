@@ -1,0 +1,38 @@
+@import "base/normalize";
+@import "base/default";
+
+
+
+$main-bg-color: $gray;
+$section-header-bg-color: $dark-blue;
+$section-header-font-color: $light;
+
+
+
+body {
+    background-color: $main-bg-color;
+}
+
+.main__header {
+    padding-top: $general-padding * 5;
+    padding-bottom: $general-padding * 5;
+    font-size: 2rem;
+    text-align: center;
+    color: $dark-blue;
+}
+
+
+
+.section__header {
+    padding: $general-padding;
+    font-size: 1.2rem;
+    background-color: $section-header-bg-color;
+    color: $section-header-font-color;
+}
+
+.section__content {
+    padding-top: $general-padding * 2;
+    padding-bottom: $general-padding * 2;
+    padding-left: $general-padding * 5;
+    padding-right: $general-padding * 5;
+}

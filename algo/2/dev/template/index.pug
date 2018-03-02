@@ -1,0 +1,23 @@
+doctype html
+html(lang="ru")
+
+    head
+        title Абитуриент-РуРу
+        meta(charset="utf-8")
+        link(rel="stylesheet", href="../style/index.css")
+
+    body
+        .main
+            .main__header Система управления абитуриентом
+            .section 
+                .section__header Добавление
+                .section__content 
+                    include student/add.pug
+            .section 
+                .section__header Удаление
+                .section__content
+                    include student/delete.pug
+            .section 
+                .section__header Список
+                .section__content
+                    include student/list.pug
