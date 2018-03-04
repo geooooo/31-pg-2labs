@@ -1,12 +1,12 @@
 
 <link rel="stylesheet" href="../style/student/list.css"/>
-<form class="form" id="formList" action="" method="get">
+<form class="form" id="formList" action="/cgi-bin/request/list.py" method="get">
   <div class="form__line">
     <div class="form__element">
       <label for="isAllHighScoreList">Все экзамены сданы на отлично:</label>
     </div>
     <div class="form__element">
-      <input id="isAllHighScoreList" type="checkbox"/>
+      <input id="isAllHighScoreList" type="checkbox" name="isAllHighScore"/>
     </div>
   </div>
   <div class="form__line">
@@ -14,7 +14,7 @@
       <label for="isDocHighScoreList">Имеется аттестат с отличием:</label>
     </div>
     <div class="form__element">
-      <input id="isDocHighScoreList" type="checkbox"/>
+      <input id="isDocHighScoreList" type="checkbox" name="isDocHighScore"/>
     </div>
   </div>
   <div class="form__line">
@@ -22,7 +22,7 @@
       <label for="isExternalList">Проживает вне города, в котором расположен университет:</label>
     </div>
     <div class="form__element">
-      <input id="isExternalList" type="checkbox"/>
+      <input id="isExternalList" type="checkbox" name="isExternal"/>
     </div>
   </div>
   <div class="form__line">
@@ -30,7 +30,7 @@
       <label for="isHostelList">Нуждается в общежитии:</label>
     </div>
     <div class="form__element">
-      <input id="isHostelList" type="checkbox"/>
+      <input id="isHostelList" type="checkbox" name="isHostel"/>
     </div>
   </div>
   <div class="form__line">

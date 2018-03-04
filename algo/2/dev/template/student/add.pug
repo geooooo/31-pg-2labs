@@ -1,28 +1,28 @@
-form.form#formAdd(action="", method="post")
+form.form#formAdd(action="/cgi-bin/request/add.py", method="post")
     
     .form__line
         .form__element
             label(for="lastNameAdd") Фамилия:
         .form__element
-            input#lastNameAdd(type="text")
+            input#lastNameAdd(type="text", name="lastName")
         
     .form__line
         .form__element
             label(for="cityAdd") Город проживания:
         .form__element
-            input#cityAdd(type="text")
+            input#cityAdd(type="text", name="city")
 
     .form__line
         .form__element
             label(for="isDocHighScoreAdd") Наличие аттестата с отличием:
         .form__element
-            input#isDocHighScoreAdd(type="checkbox")
+            input#isDocHighScoreAdd(type="checkbox", name="isDocHighScore")
 
     .form__line
         .form__element
             label(for="isHostelAdd") Необходимо общежитие:
         .form__element
-            input#isHostelAdd(type="checkbox")
+            input#isHostelAdd(type="checkbox", name="isHostel")
 
     .form__line
         .form__element
@@ -35,7 +35,7 @@ form.form#formAdd(action="", method="post")
                             .form__element
                                 label(for="scoreMathAdd") Математика:       
                             .form__element                      
-                                select#scoreMathAdd
+                                select#scoreMathAdd(name="scoreMath")
                                     option 2
                                     option 3
                                     option 4
@@ -44,7 +44,7 @@ form.form#formAdd(action="", method="post")
                             .form__element
                                 label(for="scorePhysAdd") Физика:
                             .form__element
-                                select#scorePhysAdd
+                                select#scorePhysAdd(name="scorePhys")
                                     option 2
                                     option 3
                                     option 4
@@ -53,7 +53,7 @@ form.form#formAdd(action="", method="post")
                             .form__element
                                 label(for="scoreInfoAdd") Информатика:
                             .form__element
-                                select#scoreInfoAdd
+                                select#scoreInfoAdd(name="scoreInfo")
                                     option 2
                                     option 3
                                     option 4

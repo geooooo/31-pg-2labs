@@ -2,31 +2,31 @@ link(rel="stylesheet", href="../style/student/list.css")
 
 
 
-form.form#formList(action="", method="get")
+form.form#formList(action="/cgi-bin/request/list.py", method="get")
     
     .form__line
         .form__element
             label(for="isAllHighScoreList") Все экзамены сданы на отлично:
         .form__element
-            input#isAllHighScoreList(type="checkbox")
+            input#isAllHighScoreList(type="checkbox", name="isAllHighScore")
     
     .form__line
         .form__element
             label(for="isDocHighScoreList") Имеется аттестат с отличием:
         .form__element
-            input#isDocHighScoreList(type="checkbox")    
+            input#isDocHighScoreList(type="checkbox", name="isDocHighScore")    
     
     .form__line
         .form__element
             label(for="isExternalList") Проживает вне города, в котором расположен университет:
         .form__element
-            input#isExternalList(type="checkbox")
+            input#isExternalList(type="checkbox", name="isExternal")
     
     .form__line
         .form__element
             label(for="isHostelList") Нуждается в общежитии:
         .form__element
-            input#isHostelList(type="checkbox")
+            input#isHostelList(type="checkbox", name="isHostel")
     
     .form__line
         .form__element

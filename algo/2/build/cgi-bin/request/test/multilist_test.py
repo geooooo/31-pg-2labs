@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/home/geo/Документы/31-pg-2labs/algo/2")
+sys.path.append("/home/geo/Документы/31-pg-2labs/algo/2/build/cgi-bin/request")
 
 from unittest import TestCase
 from mylist.multilist import MultiList
@@ -13,7 +13,8 @@ class TestMultiList(TestCase):
         self.lb = [3]
         self.lc = []
         self.ll = self.la + self.lb + self.lc
-        self.l = MultiList(["a", "b", "c"])
+        self.groups = ["a", "b", "c", "all"]
+        self.l = MultiList(self.groups)
         for a in self.la:
             self.l.insert(a, ["a"])
         for b in self.lb:
@@ -77,3 +78,18 @@ class TestMultiList(TestCase):
         self.assertTrue(self.l.is_empty())
         self.assertEqual(None, self.l._descriptors["all"]["first"])
         self.assertEqual(None, self.l._descriptors["all"]["last"])
+
+
+    def test_dumps_loads(self):
+        tmps = self.l.dumps()
+        self.l.loads(tmps)
+        for a1, a2 in zip(self.ll, self.l.get_list_by_groups("all")):
+            self.assertEqual(a1, a2["value"])
+        for a1, a2 in zip(self.la, self.l.get_list_by_groups("a")):
+            self.assertEqual(a1, a2["value"])
+        for b1, b2 in zip(self.lb, self.l.get_list_by_groups("b")):
+            self.assertEqual(b1, b2["value"])
+        for c1, c2 in zip(self.lc, self.l.get_list_by_groups("c")):
+            self.assertEqual(c1, c2["value"])
+        self.assertEqual(len(self.ll), self.l._count)
+        self.assertEqual(self.groups, self.l._groups)

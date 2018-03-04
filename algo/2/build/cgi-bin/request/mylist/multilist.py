@@ -6,6 +6,7 @@
 
 from copy import deepcopy as copy
 from .linearlist import LinearList
+import pickle
 
 
 
@@ -78,7 +79,8 @@ class MultiList:
             else:
                 linear_list.insert({
                     "id": ptr["id"],
-                    "value": ptr["value"]
+                    "value": ptr["value"],
+                    "groups": [group for group in ptr["ptr"].keys() if group != "all"]
                 })
             ptr = ptr["ptr"]["all"]["next"]
         return linear_list
@@ -121,6 +123,20 @@ class MultiList:
             Проверка списка на пустоту
         """
         return len(self) == 0
+
+
+    def dumps(self):
+        """
+            Преобразует объект в строку
+        """
+        return pickle.dumps(self)
+
+
+    def loads(self, string):
+        """
+            Преобразует строку в объект
+        """
+        self = pickle.loads(string)
 
 
     def _createElement(self, value, groups):

@@ -1,16 +1,16 @@
-form.form#formDel(action="", method="post")
+form.form#formDel(action="/cgi-bin/request/delete.py", method="post")
     
     .form__line
         .form__element
             label(for="isDelAllDel") Удалить сведения обо всех абитуриентах:
         .form__element
-            input#isDelAllDel(type="checkbox")
+            input#isDelAllDel(type="checkbox", name="isDelAll")
     
     .form__line
         .form__element
             label(for="studentNumberDel") Номер абитуриента:
         .form__element
-            input#studentNumberDel(type="text")
+            input#studentNumberDel(type="text", name="studentNumber")
         
     .form__line
         .form__element
