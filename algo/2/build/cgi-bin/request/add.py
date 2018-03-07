@@ -44,4 +44,4 @@ if student["lastName"] and student["city"]:
     response["message"] = ""
 
 univ.close()
-print(json.dumps(response))
+print(json.dumps(response, ensure_ascii=False))

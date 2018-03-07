@@ -4,6 +4,7 @@
     <title>Абитуриент-РуРу</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../style/index.css">
+    <script src="../script/index.dart.js"></script>
   </head>
   <body>
     <div class="main">
@@ -58,10 +59,10 @@
                         </div>
                         <div class="form__element">                     
                           <select id="scoreMathAdd" name="scoreMath">
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                         </div>
                       </div>
@@ -71,10 +72,10 @@
                         </div>
                         <div class="form__element">
                           <select id="scorePhysAdd" name="scorePhys">
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                         </div>
                       </div>
@@ -84,10 +85,10 @@
                         </div>
                         <div class="form__element">
                           <select id="scoreInfoAdd" name="scoreInfo">
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                         </div>
                       </div>
@@ -98,7 +99,7 @@
             </div>
             <div class="form__line">
               <div class="form__element">
-                <input class="form__line" type="submit" value="Добавить">
+                <input class="form__line" id="submitAdd" type="submit" value="Добавить">
               </div>
             </div>
           </form>
@@ -126,7 +127,7 @@
             </div>
             <div class="form__line">
               <div class="form__element">
-                <input class="form__line" type="submit" value="Удалить">
+                <input class="form__line" id="submitDel" type="submit" value="Удалить">
               </div>
             </div>
           </form>
@@ -135,7 +136,6 @@
       <div class="section"> 
         <div class="section__header">Список</div>
         <div class="section__content">
-          <link rel="stylesheet" href="../style/student/list.css">
           <form class="form" id="formList" action="/cgi-bin/request/list.py" method="get">
             <div class="form__line">
               <div class="form__element">
@@ -171,120 +171,11 @@
             </div>
             <div class="form__line">
               <div class="form__element">
-                <input type="submit" value="Найти">
-              </div>
-            </div>
-            <div class="list">
-              <div class="list__item list student">
-                <div class="list__item">№:
-                  <div class="student__number">0</div>
-                </div>
-                <div class="list__item">Фамилия:
-                  <div class="student__lastname">null</div>
-                </div>
-                <div class="list__item">Город:
-                  <div class="student__city">null</div>
-                </div>
-                <div class="list__item">Результаты экзамена:
-                  <div class="list">
-                    <div class="list__item">Математика:
-                      <div class="student__scoreMath">0</div>
-                    </div>
-                    <div class="list__item">Физика:
-                      <div class="student__scorePhys">0</div>
-                    </div>
-                    <div class="list__item">Информатика:
-                      <div class="student__scoreInfo">0</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="list__item">Аттестат с отличием:
-                  <div class="student__isDocHighScore">Нет</div>
-                </div>
-                <div class="list__item">Все экзамены на "отлично":
-                  <div class="student__isAllHighScore">Нет</div>
-                </div>
-                <div class="list__item">Иногородний:
-                  <div class="student__isExternal">Нет</div>
-                </div>
-                <div class="list__item">Нуждается в общежитии:
-                  <div class="student__isHostel">Нет</div>
-                </div>
-              </div>
-              <div class="list__item list student">
-                <div class="list__item">№:
-                  <div class="student__number">1</div>
-                </div>
-                <div class="list__item">Фамилия:
-                  <div class="student__lastname">null</div>
-                </div>
-                <div class="list__item">Город:
-                  <div class="student__city">null</div>
-                </div>
-                <div class="list__item">Результаты экзамена:
-                  <div class="list"> 
-                    <div class="list__item">Математика:
-                      <div class="student__scoreMath">0</div>
-                    </div>
-                    <div class="list__item">Физика:
-                      <div class="student__scorePhys">0</div>
-                    </div>
-                    <div class="list__item">Информатика:
-                      <div class="student__scoreInfo">0</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="list__item">Аттестат с отличием:
-                  <div class="student__isDocHighScore">Нет</div>
-                </div>
-                <div class="list__item">Все экзамены на "отлично":
-                  <div class="student__isAllHighScore">Нет</div>
-                </div>
-                <div class="list__item">Иногородний:
-                  <div class="student__isExternal">Нет</div>
-                </div>
-                <div class="list__item">Нуждается в общежитии:
-                  <div class="student__isHostel">Нет</div>
-                </div>
-              </div>
-              <div class="list__item list student">
-                <div class="list__item">№:
-                  <div class="student__number">2</div>
-                </div>
-                <div class="list__item">Фамилия:
-                  <div class="student__lastname">null</div>
-                </div>
-                <div class="list__item">Город:
-                  <div class="student__city">null</div>
-                </div>
-                <div class="list__item">Результаты экзамена:
-                  <div class="list">
-                    <div class="list__item">Математика:
-                      <div class="student__scoreMath">0</div>
-                    </div>
-                    <div class="list__item">Физика:
-                      <div class="student__scorePhys">0</div>
-                    </div>
-                    <div class="list__item">Информатика:
-                      <div class="student__scoreInfo">0</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="list__item">Аттестат с отличием:
-                  <div class="student__isDocHighScore">Нет</div>
-                </div>
-                <div class="list__item">Все экзамены на "отлично":
-                  <div class="student__isAllHighScore">Нет</div>
-                </div>
-                <div class="list__item">Иногородний:
-                  <div class="student__isExternal">Нет</div>
-                </div>
-                <div class="list__item">Нуждается в общежитии:
-                  <div class="student__isHostel">Нет</div>
-                </div>
+                <input id="submitList" type="submit" value="Найти">
               </div>
             </div>
           </form>
+          <div class="list" id="studentList"></div>
         </div>
       </div>
     </div>

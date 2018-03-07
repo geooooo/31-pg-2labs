@@ -36,32 +36,32 @@ form.form#formAdd(action="/cgi-bin/request/add.py", method="post")
                                 label(for="scoreMathAdd") Математика:       
                             .form__element                      
                                 select#scoreMathAdd(name="scoreMath")
-                                    option 2
-                                    option 3
-                                    option 4
-                                    option 5
+                                    option(value="2") 2
+                                    option(value="3") 3
+                                    option(value="4") 4
+                                    option(value="5") 5
                         .form__line
                             .form__element
                                 label(for="scorePhysAdd") Физика:
                             .form__element
                                 select#scorePhysAdd(name="scorePhys")
-                                    option 2
-                                    option 3
-                                    option 4
-                                    option 5
+                                    option(value="2") 2
+                                    option(value="3") 3
+                                    option(value="4") 4
+                                    option(value="5") 5
                         .form__line
                             .form__element
                                 label(for="scoreInfoAdd") Информатика:
                             .form__element
                                 select#scoreInfoAdd(name="scoreInfo")
-                                    option 2
-                                    option 3
-                                    option 4
-                                    option 5
+                                    option(value="2") 2
+                                    option(value="3") 3
+                                    option(value="4") 4
+                                    option(value="5") 5
 
     .form__line
         .form__element
-            input.form__line(type="submit", value="Добавить")
+            input.form__line#submitAdd(type="submit", value="Добавить")
     
     
     
