@@ -2,7 +2,7 @@ topostfix(N, S, [N | S]) :-
     number(N).
 topostfix(E, S, R) :-
     E =.. [Op, A, B],
-    member(Op, [+, -, *, /]),
+    member(Op, [*, /, +, -]),
     topostfix(A, [Op | S], S1),
     topostfix(B, S1, R).
 
@@ -15,13 +15,7 @@ calc([OP|CS], [N1, N2|S], R) :-
     N is E,
     calc(CS, [N | S], R).
 
-run(EXPR, RES).
-
-% ?- calc([+], [4, 5], R).
-% R = 9.
-%
-% ?- topostfix(1/1, [], R).
-% R = [1, 1, /] .
-%
-% ?- calc([/], [4, 5], R).
-% R = 0.8.
+run(E, R1) :-
+    topostfix(E, S, R),
+    calc(R, S, R1),
+    !.
