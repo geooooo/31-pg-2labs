@@ -28,8 +28,8 @@ response = {
 
 student["lastName"] = form.getfirst("lastName", "").strip()
 student["city"] = form.getfirst("city", "").strip()
-isDocHighScore = bool(form.getfirst("isDocHighScore", False))
-isHostel = bool(form.getfirst("isHostel", False))
+isDocHighScore = form.getfirst("isDocHighScore").lower() == "true"
+isHostel = form.getfirst("isHostel").lower() == "true"
 student["scores"]["math"] = int(form.getfirst("scoreMath"))
 student["scores"]["info"] = int(form.getfirst("scoreInfo"))
 student["scores"]["phys"] = int(form.getfirst("scorePhys"))

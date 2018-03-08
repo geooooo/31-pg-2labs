@@ -27,7 +27,7 @@ response = {
     "status": "bad"
 }
 
-isDelAll = bool(form.getfirst("isDelAll", False))
+isDelAll = form.getfirst("isDelAll").lower() == "true"
 if isDelAll:
     univ.delete_all()
     response["status"] = "ok"
@@ -45,4 +45,4 @@ else:
             response["status"] = "ok"
 
 univ.close()
-print(json.dumps(response))
+print(json.dumps(response, ensure_ascii=False))

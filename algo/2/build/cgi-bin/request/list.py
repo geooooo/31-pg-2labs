@@ -24,13 +24,14 @@ print("Content-Type: text/html; charset=utf-8\n")
 univ = Univ()
 form = cgi.FieldStorage()
 response = {
-    "status": "bad"
+    "status": "bad",
+    "message": "Ошибка при получении списка абитуриентов !"
 }
 
-isDocHighScore = bool(form.getfirst("isDocHighScore", False))
-isHostel = bool(form.getfirst("isHostel", False))
-isExternal = bool(form.getfirst("isExternal", False))
-isAllHighScore = bool(form.getfirst("isAllHighScore", False))
+isDocHighScore = form.getfirst("isDocHighScore").lower() == "true"
+isHostel = form.getfirst("isHostel").lower() == "true"
+isExternal =form.getfirst("isExternal").lower() == "true"
+isAllHighScore = form.getfirst("isAllHighScore").lower() == "true"
 
 groups = []
 if isDocHighScore:
@@ -46,4 +47,4 @@ response["students"] = [student for student in univ.get_students(groups)]
 response["status"] = "ok"
 
 univ.close()
-print(json.dumps(response))
+print(json.dumps(response, ensure_ascii=False))
