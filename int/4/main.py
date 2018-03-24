@@ -20,4 +20,4 @@ bo.init_memory([bo.GOAL, "L", "M", "N"])
 
 bo.build()
 
-bo.out()
+bo.out_to_html("result.html")

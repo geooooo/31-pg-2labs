@@ -5,6 +5,7 @@ from .backout import (
     init_memory,
     build,
     out,
+    out_to_html,
 
     GOAL,
 )

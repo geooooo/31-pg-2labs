@@ -109,8 +109,11 @@ def build():
                 conflict_set.append(number)
         actived_rule_number = conflict_set[0]
         number = actived_rule_number
+        appended_count = 0
         for i, source in zip(range(len(_rules[number]["source"])), _rules[number]["source"]):
-            _memory.insert(offset + i + 1, source)
+            if (source not in _goals):
+                _memory.insert(offset + i + 1, source)
+                appended_count += 1
         row = copy(_BackoutTableRow)
         row["number"] = number0
         row["memory"] = copy(_memory)
@@ -118,9 +121,8 @@ def build():
         row["actived_rule_number"] = actived_rule_number
         _exclude_goals(_rules[number]["source"])
         _table.append(row)
-        # cprint(row)
         number0 += 1
-        offset += 1
+        offset += appended_count
         conflict_set.pop(0)
 
 
@@ -131,6 +133,44 @@ def out():
     """
     global _table
     cprint(_table)
+
+
+
+def out_to_html(filename):
+    global _table
+    with open(filename, "wt") as htmlfile:
+        print(
+            "<style>"
+                "table { border:1px solid black; border-collapse:collapse; }"
+                "td, th { border: 1px solid black; padding: 5px; }"
+            "</style>",
+            file=htmlfile
+        )
+        print("<table>", file=htmlfile)
+        print(
+            "<tr>"
+                "<th>Номер шага</th>"
+                "<th>Память</th>"
+                "<th>Конфликтное множество</th>"
+                "<th>Активное правило</th>"
+            "</tr>",
+            file=htmlfile
+        )
+        for row in _table:
+            row["conflict_set"] = [x + 1 for x in row["conflict_set"]]
+            row["actived_rule_number"] = row["actived_rule_number"] + 1
+            print(
+                "<tr>"
+                    f"<td>{row['number']}</td>"
+                    f"<td>{', '.join(row['memory'])}</td>"
+                    f"<td>{row['conflict_set']}</td>"
+                    f"<td>{row['actived_rule_number']}</td>"
+                "</tr>",
+                file=htmlfile
+            )
+        print("</table>", file=htmlfile)
+
+
 
 
 
