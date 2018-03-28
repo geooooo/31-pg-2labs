@@ -124,6 +124,7 @@ def build():
         number0 += 1
         offset += appended_count
         conflict_set.pop(0)
+    _table[-1]["actived_rule_number"] = "Остановка"
 
 
 
@@ -158,7 +159,7 @@ def out_to_html(filename):
         )
         for row in _table:
             row["conflict_set"] = [x + 1 for x in row["conflict_set"]]
-            row["actived_rule_number"] = row["actived_rule_number"] + 1
+            row["actived_rule_number"] = row["actived_rule_number"] + 1 if type(row["actived_rule_number"]) == int else row["actived_rule_number"]
             print(
                 "<tr>"
                     f"<td>{row['number']}</td>"
