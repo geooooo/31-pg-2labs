@@ -6,6 +6,7 @@
     5. Выяснить на каких промежутках есть корни
 """
 
+
 def main():
     # Вводим многочлен
     print("Введите многочлен: ", end="")
@@ -14,24 +15,30 @@ def main():
     f = eval("lambda x: {}".format(expr))
     # Ввод диапазона
     print("Введите интервал a..b: ", end="")
-    a, b = [int(num) for num in input().split("..")]
-    # Ввод точности
-    print("Введите точность: ", end="")
-    accur = int(input())
+    a, b = [float(num) for num in input().split("..")]
+    # Ввод шага
+    print("Введите шаг: ", end="")
+    step = float(input())
     # Вычисление значений на интервале
     vals = {}
-    for x in range(a, b + 1):
+    x = a
+    while x <= b:
         vals[x] = f(x)
+        x += step
     # Вывод промежуточных результатов
     for x, fx in vals.items():
-        print("При x = {:2}, f(x) = {}".format(x, fx))
+        print("При x = {:2}, f(x) = {:4}".format(x, fx))
     # Поиск промежутков с корнями
     sign_prev = None
     for x, fx in vals.items():
         sign_cur = "-" if fx < 0 else "+"
         if sign_prev and (sign_prev != sign_cur):
-            print("Есть корень: [{0:2}..{1:2}] f(x) = {2:.{3}f}".format(x-1, x, fx, accur))
+            if f(x - step) == 0:
+                print("Корень найден при x = {}".format(x - step))
+            else:
+                print("Есть корень: [{0:2}..{1:2}]".format(x-step, x))
         sign_prev = "-" if fx < 0 else "+"
+
 
 if __name__ == "__main__":
     main()
