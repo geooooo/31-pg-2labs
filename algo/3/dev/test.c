@@ -10,6 +10,10 @@ int main(void) {
     ograph_Vertex* a = ograph_create_vertex();
     a->value = 'A';
 
+    ograph_free_vertex(a);
+
+    return 0;
+
     ograph_Vertex* graph = a;
 
     ograph_Vertex* b = ograph_create_vertex();

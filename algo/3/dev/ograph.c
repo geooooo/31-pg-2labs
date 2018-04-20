@@ -24,7 +24,7 @@ ograph_Vertex* ograph_create_vertex(void)
     if (vertex == NULL) {
         ograph_error(ograph_E_MEMORY_ALLOC);
     }
-    vertex->value = ograph_NONE_VALUE;
+    vertex->value = NULL;
     vertex->next  = NULL;
     return vertex;
 }
