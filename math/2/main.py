@@ -47,7 +47,10 @@ def find_root_newton(x0, x1, accur, f, df):
         lc = x1
     while True:
         fc = f(lc)
-        lc = lc - f(lc) / df(lc)
+        try:
+            lc = lc - f(lc) / df(lc)
+        except ZeroDivisionError:
+            lc = lc - f(lc)
         if abs(fc) < accur:
             break
     return lc
@@ -61,7 +64,10 @@ def find_root_newton_mod(x0, x1, accur, f, df):
     fb = df(lc)
     while True:
         fc = f(lc)
-        lc = lc - f(lc) / fb
+        try:
+            lc = lc - f(lc) / fb
+        except ZeroDivisionError:
+            lc = lc - f(lc)
         print(abs(fc))
         if abs(fc) < accur:
             break
@@ -102,8 +108,8 @@ def get_df(f_str):
 
 # отладка
 find_root_newton_mod.__code__ = find_root_newton.__code__
-import sys
-sys.stdin = open("in.txt", "rt")
+# import sys
+# sys.stdin = open("in.txt", "rt")
 
 
 def main():
