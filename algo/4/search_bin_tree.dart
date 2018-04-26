@@ -214,7 +214,7 @@ class SearchBinTree {
                 } else {
                     innerAppendNode(cur_node.left, new_node);
                 }
-            } else {
+            } else if (new_node.value > cur_node.value) {
                 // идём в правое поддерево
                 if (cur_node.right == null) {
                     cur_node.right = new_node;

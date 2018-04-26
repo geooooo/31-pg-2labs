@@ -9,15 +9,15 @@ void main(List<String> args) {
     // print("Высота дерева: ${tree.height}");
     // print("Пятый узел дерева: ${tree[4]}");
     // print("Отличные на 1: ${tree.getNodesValueDifOne()}");
-    tree.deleteNode(0);
-    tree.deleteNode(9);
-    tree.deleteNode(7);
-    tree.deleteNode(8);
-    tree.deleteNode(5);
-    tree.deleteNode(4);
-    tree.deleteNode(3);
-    tree.deleteNode(2);
-    tree.deleteNode(6);
+    // tree.deleteNode(0);
+    // tree.deleteNode(9);
+    // tree.deleteNode(7);
+    // tree.deleteNode(8);
+    // tree.deleteNode(5);
+    // tree.deleteNode(4);
+    // tree.deleteNode(3);
+    // tree.deleteNode(2);
+    // tree.deleteNode(6);
     print(tree);
     print("");
 
