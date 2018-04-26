@@ -149,25 +149,19 @@ class SearchBinTree {
     int operator [](int index) {
 
         // Смешанный обход: левый - корень - правый
-        int node_value;
-        void inner(NodeBinTree node, int index) {
-            // Вычитаемое для индекса правого поддерева
-            // 1, если левое поддерево имеется в текущем узле
-            // 2, если левого поддерева нет
-            int rsub = 1;
-            if (node.left != null) {
-                rsub = 2;
-                inner(node.left, index - 1);
-            }
-            if (index == 0) {
-                node_value = node.value;
+        var nums = new List<int>();
+        void innerFindAllList(NodeBinTree node) {
+            if (node == null) return;
+            if ((node.left == null) && (node.right == null)) {
+                nums.add(node.value);
                 return;
             }
-            if (node.right != null) inner(node.right, index - rsub);
+            innerFindAllList(node.left);
+            innerFindAllList(node.right);
         }
 
-        inner(this._root, index);
-        return node_value;
+        innerFindAllList(this._root);
+        return nums[index];
     }
 
     /// Определение высоты дерева
