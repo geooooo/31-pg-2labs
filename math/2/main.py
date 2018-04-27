@@ -40,8 +40,8 @@ def find_root_hord(x0, x1, accur, f):
     return lc
 
 
-def find_root_newton(x0, x1, accur, f, df):
-    if f(x0) * df(x1) > 0:
+def find_root_newton(x0, x1, accur, f, df, df2):
+    if f(x0) * df2(x1) > 0:
         lc = x0
     else:
         lc = x1
@@ -49,15 +49,15 @@ def find_root_newton(x0, x1, accur, f, df):
         fc = f(lc)
         try:
             lc = lc - f(lc) / df(lc)
-        except ZeroDivisionError:
+        except:
             lc = lc - f(lc)
         if abs(fc) < accur:
             break
     return lc
 
 
-def find_root_newton_mod(x0, x1, accur, f, df):
-    if f(x0) * df(x1) > 0:
+def find_root_newton_mod(x0, x1, accur, f, df, df2):
+    if f(x0) * df2(x1) > 0:
         lc = x0
     else:
         lc = x1
@@ -66,9 +66,9 @@ def find_root_newton_mod(x0, x1, accur, f, df):
         fc = f(lc)
         try:
             lc = lc - f(lc) / fb
-        except ZeroDivisionError:
+        except:
             lc = lc - f(lc)
-        print(abs(fc))
+        # print(abs(fc))
         if abs(fc) < accur:
             break
     return lc
@@ -103,13 +103,13 @@ def get_df(f_str):
         l, r = pow_expr.span()
         expr_list.append(new_expr)
         df = df[:l-2] + df[r:]
-    return eval(f"lambda x: {df}")
+    return df, eval(f"lambda x: {df}")
 
 
 # отладка
-find_root_newton_mod.__code__ = find_root_newton.__code__
-# import sys
-# sys.stdin = open("in.txt", "rt")
+# find_root_newton_mod.__code__ = find_root_newton.__code__
+import sys
+sys.stdin = open("in.txt", "rt")
 
 
 def main():
@@ -118,7 +118,8 @@ def main():
     f_str = input()
     # Определяем функцию от заданного многочлена
     f = eval("lambda x: {}".format(f_str))
-    df = get_df(f_str)
+    df_str, df = get_df(f_str)
+    _, df2 = get_df(df_str)
     # Ввод диапазона
     print("Введите интервал a..b: ", end="")
     a, b = [float(num) for num in input().split("..")]
@@ -160,13 +161,13 @@ def main():
                 print("(Ньютон) Есть корень: {2:0.{3}f} на отрезке [{0:2}..{1:2}]".format(
                     x - step,
                     x,
-                    find_root_newton(x - step, x, accur, f, df),
+                    find_root_newton(x - step, x, accur, f, df, df2),
                     len(str(accur)) - 2
                 ))
                 print("(Ньютон мод) Есть корень: {2:0.{3}f} на отрезке [{0:2}..{1:2}]".format(
                     x - step,
                     x,
-                    find_root_newton_mod(x - step, x, accur, f, df),
+                    find_root_newton_mod(x - step, x, accur, f, df, df2),
                     len(str(accur)) - 2
                 ))
                 print()
