@@ -5,8 +5,21 @@
 
 
 
+void test_case1(void);
+
+
+
 int main(void) {
 
+    test_case1();
+    return EXIT_SUCCESS;
+
+}
+
+
+
+void test_case1(void)
+{
     ograph_Vertex* a = ograph_create_vertex();
     a->value = 'A';
 
@@ -53,15 +66,9 @@ int main(void) {
     ograph_add(&graph, e);
     ograph_add(&graph, f);
 
-    // ograph_VertexList* vertex_list = d->vertex_list;
-    // printf("%p - %c", vertex_list->vertex->next, vertex_list->vertex->value);
-    // printf("VertexList: ");
-    // while (vertex_list != NULL) {
-    //     printf("%c ", vertex_list->vertex->value);
-    //     vertex_list = vertex_list->next;
-    // }
-    // putchar('\n');
-    // return 0;
+    ograph_del(&graph, b);
+    ograph_del(&graph, a);
+    // ograph_del(&graph, d);
 
     ograph_Vertex* _graph = graph;
     while (_graph != NULL) {
@@ -76,16 +83,6 @@ int main(void) {
         printf("\n\n");
     }
 
-    printf("%d\n", ograph_is_vertex_in_graph(graph, c));
-    printf("%d\n", ograph_is_vertex_in_graph(graph, x));
-
-    printf("%d\n", ograph_is_exists_edge(graph, a, b));
-    printf("%d\n", ograph_is_exists_edge(graph, a, x));
-    printf("%d\n", ograph_is_exists_edge(graph, a, f));
-
     ograph_free_vertex(graph);
     ograph_free_vertex(x);
-
-    return EXIT_SUCCESS;
-
 }

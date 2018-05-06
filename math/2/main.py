@@ -75,8 +75,6 @@ def find_root_newton_mod(x0, x1, accur, f, df, df2):
 
 
 def get_df(f_str):
-    # x**3 - 4.5*x**2 + 2*x + 0.77
-
     # замена степеней
     df = f_str + " "
     expr_list = []
@@ -104,12 +102,6 @@ def get_df(f_str):
         expr_list.append(new_expr)
         df = df[:l-2] + df[r:]
     return df, eval(f"lambda x: {df}")
-
-
-# отладка
-# find_root_newton_mod.__code__ = find_root_newton.__code__
-import sys
-sys.stdin = open("in.txt", "rt")
 
 
 def main():

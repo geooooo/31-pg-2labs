@@ -1,0 +1,72 @@
+ABCDEF
+011100
+000011
+000100
+000100
+100000
+000000
+
+
+ograph_Vertex* ograph_create_from_file(char* filename);
+/*
+    Создание графа из файла
+    filename - файл, содержащий матрицу смежности
+    return   - сформированный граф
+*/
+ograph_Vertex* ograph_create_from_file(char* filename)
+{
+    FILE* file = NULL;
+    if ((file = fopen(filename, "rt")) == NULL) {
+        ograph_error(ograph_E_FILE_EXISTS);
+    }
+    // Считывание названий вершин
+    // и создание вершин графа
+    ograph_Vertex* graph = NULL;
+    ograph_Vertex* graph_next = NULL;
+    int vertex_count = 0;
+    while (!feof(file)) {
+        char c = fgetc(file);
+        if (c == '\n') {
+            break;
+        }
+        if (graph_next != NULL) {
+            graph_next->next = ograph_create_vertex();
+            graph_next = graph_next->next;
+        } else {
+            graph = graph_next = ograph_create_vertex();
+        }
+        graph_next->value = c;
+        vertex_count++;
+    }
+    ograph_Vertex** vertexs = (ograph_Vertex**)malloc(vertex_count * sizeof(ograph_Vertex*));
+    ograph_Vertex* _graph = graph;
+    for (int i = 0; i < vertex_count; i++) {
+        vertexs[i] = _graph;
+        _graph = _graph->next;
+    }
+    // Считывание матрицы смежности
+    // и формирование связей графа
+    int vertex_num1 = 0;
+    int vertex_num2 = 0;
+    int vertexs_link_count = 0;
+    ograph_Vertex** vertexs_link = NULL;
+    while (!feof(file)) {
+        char c = fgetc(file);
+        if (c == '\n') {
+            vertexs[vertex_num1]->vertex_list = ograph_create_vertex_list(vertexs_link, vertexs_link_count);
+            vertexs_link_count = 0;
+            free(vertexs_link);
+            vertexs_link = (ograph_Vertex**)malloc(vertex_count * sizeof(ograph_Vertex*));
+            vertex_num1++;
+            vertex_num2 = 0;
+        } else if (c == '1') {
+            vertexs_link[vertexs_link_count] = vertexs[vertex_num2];
+            vertexs_link_count++;
+        }
+        vertex_num2++;
+    }
+    free(vertexs_link);
+    free(vertexs);
+    fclose(file);
+    return graph;
+}

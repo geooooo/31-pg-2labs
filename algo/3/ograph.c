@@ -139,10 +139,39 @@ void ograph_del(ograph_Vertex** graph, ograph_Vertex* vertex)
             } else {
                 prev->next = cur->next;
             }
-            break;
+            ograph_del_from_vertex_list(graph, vertex);
+            return;
         }
         prev = cur;
         cur = cur->next;
+    }
+}
+
+
+
+void ograph_del_from_vertex_list(ograph_Vertex** graph, ograph_Vertex* vertex)
+{
+    ograph_Vertex* _graph = *graph;
+    while (_graph != NULL) {
+        ograph_VertexList* _vertex_list = _graph->vertex_list;
+        ograph_VertexList* prev_vertex_list = NULL;
+
+        // Поиск удаляемой вершины
+        while (_vertex_list != NULL) {
+            if (_vertex_list->vertex == vertex) {
+                if (prev_vertex_list == NULL) {
+                    // Если искомая вершина - первая
+                    _graph->vertex_list = _graph->vertex_list->next;
+                } else {
+                    prev_vertex_list->next = _vertex_list->next;
+                }
+                return;
+            }
+            prev_vertex_list = _vertex_list;
+            _vertex_list = _vertex_list->next;
+        }
+
+        _graph = _graph->next;
     }
 }
 

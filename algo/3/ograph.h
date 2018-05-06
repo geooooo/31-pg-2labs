@@ -8,6 +8,7 @@
 #define ograph_NONE_VALUE       '\0'
 
 #define ograph_E_MEMORY_ALLOC   "memory allocation"
+#define ograph_E_FILE_EXISTS    "file not found"
 
 
 
@@ -32,7 +33,6 @@ struct _Vertex {
 
 
 
-
 ograph_Vertex* ograph_create_vertex(void);
 
 ograph_VertexList* ograph_create_vertex_list(ograph_Vertex* vertexs[], int count);
@@ -44,6 +44,8 @@ void ograph_free_vertex_list(ograph_VertexList*);
 void ograph_add(ograph_Vertex** graph, ograph_Vertex*);
 
 void ograph_del(ograph_Vertex** graph, ograph_Vertex*);
+
+void ograph_del_from_vertex_list(ograph_Vertex** graph, ograph_Vertex* vertex);
 
 bool ograph_is_exists_edge(ograph_Vertex* graph, ograph_Vertex*, ograph_Vertex*);
 
