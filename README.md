@@ -1,1 +1,1 @@
-# Лабораторные работы ПГ, 3 курс, 2 семестр
+# University labs PG group, course 3, semester 2
